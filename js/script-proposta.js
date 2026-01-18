@@ -314,6 +314,92 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
     itemsList.appendChild(totalRow);
   }
+    // ===============================
+  // OTIMIZAÇÃO PARA MOBILE
+  // ===============================
 
-  console.log("✅ Proposta renderizada com swipe (mobile + desktop)");
+  function otimizarParaMobile() {
+    if (window.innerWidth <= 768) {
+      console.log("📱 Aplicando otimizações mobile...");
+      
+      // Ajustar todas as páginas
+      const pages = document.querySelectorAll('.page');
+      const viewportHeight = window.innerHeight;
+      
+      pages.forEach((page, index) => {
+        const contentHeight = page.scrollHeight;
+        
+        // Se conteúdo for menor que 70% da tela, ocupa tela inteira
+        // Se for maior, altura automática
+        if (contentHeight < viewportHeight * 0.7) {
+          page.style.minHeight = '100svh';
+        } else {
+          page.style.minHeight = 'auto';
+          page.style.paddingBottom = '40px';
+        }
+        
+        // Ajustar tamanho de fonte para mobile
+        const titles = page.querySelectorAll('h1');
+        titles.forEach(title => {
+          if (title.textContent.length > 20) {
+            title.style.fontSize = '28px';
+          }
+        });
+        
+        // Ajustar subtítulos
+        const subtitles = page.querySelectorAll('h2');
+        subtitles.forEach(subtitle => {
+          subtitle.style.fontSize = '20px';
+        });
+        
+        // Ajustar imagens do carrossel para mobile
+        const carrosselImages = page.querySelectorAll('.carrossel-images');
+        carrosselImages.forEach(carrossel => {
+          carrossel.style.height = Math.min(viewportHeight * 0.45, 350) + 'px';
+        });
+        
+        // Ajustar molduras
+        const molduras = page.querySelectorAll('.moldura');
+        molduras.forEach(moldura => {
+          moldura.style.height = Math.min(viewportHeight * 0.35, 250) + 'px';
+        });
+      });
+      
+      // Ajustar o preço card para mobile
+      const priceCard = document.querySelector('.price-card');
+      if (priceCard) {
+        priceCard.style.width = '95%';
+        priceCard.style.padding = '20px 15px';
+        priceCard.style.margin = '20px auto';
+        
+        // Ajustar textos dentro do price card
+        const labels = priceCard.querySelectorAll('.label');
+        const prices = priceCard.querySelectorAll('.price');
+        
+        labels.forEach(label => {
+          label.style.fontSize = '18px';
+        });
+        
+        prices.forEach(price => {
+          price.style.fontSize = '18px';
+          price.style.minWidth = '120px';
+        });
+      }
+      
+      console.log(`✅ ${pages.length} páginas otimizadas para mobile`);
+    }
+  }
+
+  // Executar quando carregar e quando redimensionar
+  window.addEventListener('load', function() {
+    setTimeout(otimizarParaMobile, 100);
+    setTimeout(otimizarParaMobile, 500); // Duplo check para conteúdo dinâmico
+  });
+
+  window.addEventListener('resize', otimizarParaMobile);
+
+  // Ajustar após renderização completa
+  setTimeout(otimizarParaMobile, 1000);
+
+  console.log("✅ Proposta renderizada com otimização mobile");
 });

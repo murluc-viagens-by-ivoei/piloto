@@ -1042,6 +1042,132 @@ body.formulario-body {
     }
 }
 
+/* ================================
+   RESPONSIVIDADE PARA FORMULÁRIO
+================================ */
+#form-body {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+    background: #f5f7fb;
+    width: 100%;
+    overflow-x: hidden;
+}
 
-/* REMOVA ou COMENTE todo este bloco */
-/* Ele conflita com as modificações acima */
+/* Mobile: formulário ocupa tela inteira */
+@media (max-width: 768px) {
+    #form-body {
+        padding: 0;
+        align-items: stretch;
+        background: #fff; /* Fundo branco no mobile */
+    }
+    
+    #form-body form {
+        border-radius: 0 !important;
+        margin: 0 !important;
+        min-height: 100vh;
+        box-shadow: none !important;
+        width: 100%;
+        padding: 20px 15px !important;
+    }
+    
+    /* Grids responsivos no mobile */
+    .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    /* Textos menores no mobile */
+    #form-body h1 {
+        font-size: 24px !important;
+    }
+    
+    #form-body h2 {
+        font-size: 18px !important;
+        margin-top: 25px !important;
+    }
+    
+    /* Inputs mais confortáveis */
+    #form-body input,
+    #form-body textarea,
+    #form-body select {
+        font-size: 16px !important; /* Evita zoom no iOS */
+        padding: 14px 12px !important;
+    }
+    
+    /* Botões maiores para touch */
+    #form-body button {
+        padding: 16px !important;
+        min-height: 50px;
+        font-size: 16px !important;
+    }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* ================================
+   AJUSTES PARA MOLDURAS NO MOBILE
+================================ */
+@media (max-width: 768px) {
+    .moldura {
+        height: 40vh !important; /* Altura relativa à tela */
+        max-height: 300px;
+        margin-bottom: 15px;
+    }
+    
+    .linha-fotos {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .linha-fotos .moldura {
+        height: 30vh !important;
+        max-height: 250px;
+    }
+}
+
+/* ================================
+   AJUSTES PARA CARROSSEL NO MOBILE
+================================ */
+@media (max-width: 768px) {
+    .carrossel-images {
+        height: 50vh !important;
+        max-height: 350px;
+        border-radius: 10px;
+    }
+    
+    .carrossel-controls {
+        margin-top: 15px;
+    }
+    
+    .carrossel-prev,
+    .carrossel-next {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+    }
+}
+
+/* ================================
+   AJUSTES PARA RODAPÉ NO MOBILE
+================================ */
+@media (max-width: 768px) {
+    .rodape {
+        position: relative !important;
+        bottom: auto !important;
+        margin-top: 30px;
+        padding-bottom: 20px;
+    }
+    
+    .rodape img {
+        width: 100% !important;
+        max-width: 300px;
+    }
+}
