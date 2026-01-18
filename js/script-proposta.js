@@ -122,7 +122,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const hotelDots = document.getElementById("carrossel-dots-hotel");
   const hotelCounter = document.getElementById("carrossel-counter-hotel");
 
-
   function renderHotel() {
     if (!hotelBox || hotelImages.length === 0) return;
 
@@ -174,8 +173,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     hotelCarrossel.appendChild(arrowRightHotel);
   }
 
-
-
   aplicarSwipe(hotelBox, window.prevSlideHotel, window.nextSlideHotel);
   renderHotel();
 
@@ -204,8 +201,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     <p>${destino.dicas || ""}</p>
   </div>
 `;
-
-
 
       if (destino.imagens?.length) {
         let current = 0;
@@ -273,7 +268,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         renderDestino();
       }
 
-
       destinosContainer.appendChild(page);
     });
   }
@@ -314,92 +308,229 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
     itemsList.appendChild(totalRow);
   }
-    // ===============================
-  // OTIMIZAÇÃO PARA MOBILE
+
+  // ===============================
+  // OTIMIZAÇÃO MOBILE DEFINITIVA
   // ===============================
 
-  function otimizarParaMobile() {
-    if (window.innerWidth <= 768) {
-      console.log("📱 Aplicando otimizações mobile...");
+  function otimizarMobileDefinitivo() {
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+      console.log("📱 Aplicando otimizações mobile definitivas...");
       
-      // Ajustar todas as páginas
       const pages = document.querySelectorAll('.page');
       const viewportHeight = window.innerHeight;
+      const viewportWidth = window.innerWidth;
+      
+      // ========== GARANTIR LARGURA 100% ==========
+      document.documentElement.style.width = '100vw';
+      document.body.style.width = '100vw';
+      document.body.style.overflowX = 'hidden';
       
       pages.forEach((page, index) => {
         const contentHeight = page.scrollHeight;
         
-        // Se conteúdo for menor que 70% da tela, ocupa tela inteira
-        // Se for maior, altura automática
-        if (contentHeight < viewportHeight * 0.7) {
+        // ========== ESTRATÉGIA DE ALTURA INTELIGENTE ==========
+        // Página 1 (geralmente curta): altura fixa = tela inteira
+        if (index === 0 && contentHeight < viewportHeight * 0.9) {
+          page.style.height = viewportHeight + 'px';
+          page.style.minHeight = viewportHeight + 'px';
+          page.style.maxHeight = viewportHeight + 'px';
+          page.style.overflowY = 'hidden';
+          page.style.display = 'flex';
+          page.style.flexDirection = 'column';
+          page.style.justifyContent = 'center';
+        }
+        // Outras páginas curtas: altura mínima 100svh
+        else if (contentHeight < viewportHeight * 0.8) {
+          page.style.height = 'auto';
           page.style.minHeight = '100svh';
-        } else {
+          page.style.maxHeight = 'none';
+          page.style.overflowY = 'hidden';
+        }
+        // Páginas longas: altura automática
+        else {
+          page.style.height = 'auto';
           page.style.minHeight = 'auto';
-          page.style.paddingBottom = '40px';
+          page.style.overflowY = 'visible';
+          page.style.paddingBottom = '50px';
         }
         
-        // Ajustar tamanho de fonte para mobile
+        // ========== GARANTIR LARGURA COMPLETA ==========
+        page.style.width = '100vw';
+        page.style.maxWidth = '100vw';
+        page.style.marginLeft = '0';
+        page.style.marginRight = '0';
+        page.style.paddingLeft = '20px';
+        page.style.paddingRight = '20px';
+        page.style.boxSizing = 'border-box';
+        
+        // ========== TIPOGRAFIA RESPONSIVA ==========
         const titles = page.querySelectorAll('h1');
         titles.forEach(title => {
-          if (title.textContent.length > 20) {
-            title.style.fontSize = '28px';
-          }
+          title.style.fontSize = 'clamp(32px, 9vw, 48px)';
+          title.style.lineHeight = '1.2';
+          title.style.wordWrap = 'break-word';
         });
         
-        // Ajustar subtítulos
         const subtitles = page.querySelectorAll('h2');
         subtitles.forEach(subtitle => {
-          subtitle.style.fontSize = '20px';
+          subtitle.style.fontSize = 'clamp(20px, 6vw, 28px)';
+          subtitle.style.lineHeight = '1.3';
         });
         
-        // Ajustar imagens do carrossel para mobile
-        const carrosselImages = page.querySelectorAll('.carrossel-images');
-        carrosselImages.forEach(carrossel => {
-          carrossel.style.height = Math.min(viewportHeight * 0.45, 350) + 'px';
+        const paragraphs = page.querySelectorAll('p');
+        paragraphs.forEach(p => {
+          p.style.fontSize = 'clamp(16px, 4.5vw, 18px)';
+          p.style.lineHeight = '1.5';
         });
         
-        // Ajustar molduras
+        // ========== IMAGENS RESPONSIVAS ==========
+        // Todas as imagens
+        const allImages = page.querySelectorAll('img');
+        allImages.forEach(img => {
+          img.style.maxWidth = '100%';
+          img.style.height = 'auto';
+          img.style.display = 'block';
+        });
+        
+        // Molduras
         const molduras = page.querySelectorAll('.moldura');
         molduras.forEach(moldura => {
-          moldura.style.height = Math.min(viewportHeight * 0.35, 250) + 'px';
+          moldura.style.height = Math.min(viewportHeight * 0.4, 300) + 'px';
+          moldura.style.width = '100%';
+          moldura.style.maxWidth = '100%';
+          moldura.style.margin = '15px auto';
+        });
+        
+        // Carrossel
+        const carrossels = page.querySelectorAll('.carrossel-images');
+        carrossels.forEach(carrossel => {
+          carrossel.style.height = Math.min(viewportHeight * 0.5, 350) + 'px';
+          carrossel.style.width = '100%';
+          carrossel.style.maxWidth = '100%';
+        });
+        
+        // Logo
+        const logos = page.querySelectorAll('.logo');
+        logos.forEach(logo => {
+          logo.style.width = 'clamp(150px, 40vw, 250px)';
+          logo.style.height = 'auto';
+          logo.style.margin = '0 auto';
         });
       });
       
-      // Ajustar o preço card para mobile
+      // ========== ELEMENTOS ESPECÍFICOS ==========
+      // Price Card
       const priceCard = document.querySelector('.price-card');
       if (priceCard) {
-        priceCard.style.width = '95%';
-        priceCard.style.padding = '20px 15px';
-        priceCard.style.margin = '20px auto';
+        priceCard.style.width = '100%';
+        priceCard.style.maxWidth = '100%';
+        priceCard.style.padding = '25px 20px';
+        priceCard.style.margin = '30px 0';
+        priceCard.style.boxSizing = 'border-box';
         
-        // Ajustar textos dentro do price card
         const labels = priceCard.querySelectorAll('.label');
         const prices = priceCard.querySelectorAll('.price');
+        const rows = priceCard.querySelectorAll('.row');
+        
+        rows.forEach(row => {
+          row.style.gridTemplateColumns = '1fr auto';
+          row.style.gap = '10px';
+        });
         
         labels.forEach(label => {
-          label.style.fontSize = '18px';
+          label.style.fontSize = 'clamp(18px, 5vw, 22px)';
         });
         
         prices.forEach(price => {
-          price.style.fontSize = '18px';
-          price.style.minWidth = '120px';
+          price.style.fontSize = 'clamp(18px, 5vw, 22px)';
+          price.style.minWidth = 'auto';
+          price.style.textAlign = 'right';
         });
       }
       
-      console.log(`✅ ${pages.length} páginas otimizadas para mobile`);
+      // Rodapé
+      const rodapes = document.querySelectorAll('.rodape');
+      rodapes.forEach(rodape => {
+        rodape.style.position = 'relative';
+        rodape.style.bottom = 'auto';
+        rodape.style.marginTop = '40px';
+        rodape.style.paddingBottom = '30px';
+        rodape.style.width = '100%';
+        
+        const rodapeImg = rodape.querySelector('img');
+        if (rodapeImg) {
+          rodapeImg.style.width = '90%';
+          rodapeImg.style.maxWidth = '300px';
+          rodapeImg.style.height = 'auto';
+        }
+      });
+      
+      // Linha de fotos
+      const linhasFotos = document.querySelectorAll('.linha-fotos');
+      linhasFotos.forEach(linha => {
+        linha.style.flexDirection = 'column';
+        linha.style.gap = '20px';
+        linha.style.width = '100%';
+        
+        const moldurasLinha = linha.querySelectorAll('.moldura');
+        moldurasLinha.forEach(moldura => {
+          moldura.style.height = Math.min(viewportHeight * 0.3, 250) + 'px';
+          moldura.style.width = '100%';
+        });
+      });
+      
+      console.log(`✅ ${pages.length} páginas otimizadas para ${viewportWidth}x${viewportHeight}`);
+    } else {
+      // ========== DESKTOP: RESETAR ESTILOS ==========
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => {
+        page.style.height = '';
+        page.style.minHeight = '';
+        page.style.maxHeight = '';
+        page.style.overflowY = '';
+        page.style.width = '';
+        page.style.marginLeft = '';
+        page.style.marginRight = '';
+        page.style.paddingLeft = '';
+        page.style.paddingRight = '';
+      });
     }
   }
 
-  // Executar quando carregar e quando redimensionar
+  // ===============================
+  // EXECUÇÃO DAS OTIMIZAÇÕES
+  // ===============================
+
+  // Executar imediatamente após renderização
+  setTimeout(otimizarMobileDefinitivo, 100);
+  
+  // Executar quando carregar completamente
   window.addEventListener('load', function() {
-    setTimeout(otimizarParaMobile, 100);
-    setTimeout(otimizarParaMobile, 500); // Duplo check para conteúdo dinâmico
+    otimizarMobileDefinitivo();
+    setTimeout(otimizarMobileDefinitivo, 300);
+    setTimeout(otimizarMobileDefinitivo, 1000);
+  });
+  
+  // Executar ao redimensionar (com debounce para performance)
+  let resizeTimeout;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(otimizarMobileDefinitivo, 200);
+  });
+  
+  // Executar quando conteúdo dinâmico for adicionado
+  const observer = new MutationObserver(function() {
+    setTimeout(otimizarMobileDefinitivo, 100);
+  });
+  
+  // Observar mudanças no body
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
   });
 
-  window.addEventListener('resize', otimizarParaMobile);
-
-  // Ajustar após renderização completa
-  setTimeout(otimizarParaMobile, 1000);
-
-  console.log("✅ Proposta renderizada com otimização mobile");
+  console.log("✅ Proposta renderizada com otimização mobile definitiva");
 });

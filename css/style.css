@@ -12,12 +12,26 @@
 /* ================================
    RESET / BASE
 ================================ */
-html,
-body {
+html, body {
     margin: 0;
     padding: 0;
-    background: #ccc;
+    width: 100%;
+    height: 100%;
     font-family: "Montserrat", sans-serif;
+    overflow-x: hidden;
+}
+
+/* GARANTIR QUE OCUPE TELA INTEIRA */
+@media (max-width: 768px) {
+    html, body {
+        height: 100svh;
+        width: 100vw;
+        overflow-x: hidden;
+    }
+    
+    body {
+        background: #fff;
+    }
 }
 
 /* ================================
@@ -38,15 +52,27 @@ body {
     .pages-wrapper {
         padding: 30px 20px;
         gap: 30px;
+        background: #f5f7fb;
+    }
+}
+
+/* MOBILE: REMOVER LIMITAÇÃO DE LARGURA */
+@media (max-width: 768px) {
+    .pages-wrapper {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100vw;
+        background: #fff;
     }
 }
 
 /* ================================
-   PÁGINA A4
+   PÁGINA
 ================================ */
 .page {
     width: 100%;
-    min-height: 100vh;
+    min-height: 100svh;
     background: #fff;
     position: relative;
     box-sizing: border-box;
@@ -61,15 +87,21 @@ body {
     margin-bottom: 20px;
 }
 
-/* Remove sombra e borda no mobile */
+/* Mobile: ocupar tela inteira */
 @media (max-width: 768px) {
     .page {
-        min-height: 100svh; /* Melhor para mobile */
-        padding: 25px 20px;
+        width: 100vw !important;
+        min-height: 100svh;
+        padding: 25px 20px !important;
         box-shadow: none;
         border-radius: 0;
         margin-bottom: 0;
-        border-bottom: 1px solid #eee; /* Separador sutil */
+        border-bottom: 1px solid #eee;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        position: relative;
+        left: 0;
+        right: 0;
     }
 }
 
@@ -87,6 +119,15 @@ body {
 }
 
 /* ================================
+   CONTEÚDO DA PÁGINA
+================================ */
+.page-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================================
    CENTRO
 ================================ */
 .center-page {
@@ -101,21 +142,31 @@ body {
    LOGO / RODAPÉ
 ================================ */
 .logo {
-    width: 250px;
+    width: clamp(150px, 40vw, 250px);
+    height: auto;
     margin: 0 auto 15px;
     display: block;
 }
 
 .rodape {
     width: 100%;
-    position: absolute;
-    bottom: 10mm;
-    left: 0;
     text-align: center;
+    margin-top: auto;
+    padding-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .rodape {
+        position: relative;
+        bottom: auto;
+        margin-top: 30px;
+        padding-bottom: 30px;
+    }
 }
 
 .rodape img {
     width: 90%;
+    max-width: 300px;
     height: auto;
 }
 
@@ -133,7 +184,6 @@ body {
     border: 1px solid rgba(0, 0, 0, .15);
     border-radius: 6px;
     margin-bottom: 12px;
-
     break-inside: avoid;
     page-break-inside: avoid;
 }
@@ -155,7 +205,6 @@ body {
     gap: 10px;
     width: 100%;
     margin-top: 20px;
-
     break-inside: avoid;
     page-break-inside: avoid;
 }
@@ -163,6 +212,29 @@ body {
 .linha-fotos .moldura {
     flex: 1;
     height: 85mm;
+}
+
+/* ================================
+   AJUSTES PARA MOLDURAS NO MOBILE
+================================ */
+@media (max-width: 768px) {
+    .moldura {
+        height: 40vh !important;
+        max-height: 300px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    
+    .linha-fotos {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .linha-fotos .moldura {
+        height: 30vh !important;
+        max-height: 250px;
+        width: 100%;
+    }
 }
 
 /* ================================
@@ -183,14 +255,14 @@ body {
 
 .infos h2,
 .bloco h2 {
-    font-size: 20px;
+    font-size: clamp(18px, 5vw, 22px);
     font-weight: 600;
     margin: 0 0 5px;
 }
 
 .infos p,
 .bloco p {
-    font-size: 16px;
+    font-size: clamp(16px, 4vw, 18px);
     line-height: 1.5;
     margin: 0 0 8px;
 }
@@ -211,13 +283,14 @@ body {
 }
 
 .center-text-slide1 h1 {
-    font-size: 50px;
+    font-size: clamp(32px, 9vw, 50px);
     font-family: 'Bebas Neue', sans-serif;
     margin: 0;
+    line-height: 1.2;
 }
 
 .center-text-slide1 h2 {
-    font-size: 42px;
+    font-size: clamp(24px, 6vw, 42px);
     color: var(--pink);
     font-family: 'Bebas Neue', sans-serif;
     margin: 0;
@@ -230,7 +303,6 @@ body {
     font-size: 18px;
     line-height: 1.5;
     margin-top: 15px;
-
     break-inside: avoid;
     page-break-inside: avoid;
 }
@@ -246,7 +318,7 @@ body {
    DICAS
 ================================ */
 #dicasCampo {
-    font-size: 16px;
+    font-size: clamp(16px, 4vw, 18px);
     line-height: 1.6;
     margin-top: 15px;
 }
@@ -291,11 +363,11 @@ body {
 }
 
 .label {
-    font-size: 24px;
+    font-size: clamp(18px, 5vw, 24px);
 }
 
 .price {
-    font-size: 24px;
+    font-size: clamp(18px, 5vw, 24px);
     font-weight: 700;
     min-width: 150px;
     text-align: right;
@@ -317,12 +389,37 @@ body {
 
 .row.total .label,
 .row.total .price {
-    font-size: 32px;
+    font-size: clamp(24px, 7vw, 32px);
     font-weight: 800;
 }
 
 .row.total .dots {
     display: none;
+}
+
+/* Mobile: price card responsivo */
+@media (max-width: 768px) {
+    .price-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 25px 20px;
+        margin: 30px 0;
+        box-sizing: border-box;
+    }
+    
+    .row {
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+    }
+    
+    .dots {
+        display: none;
+    }
+    
+    .price {
+        min-width: auto;
+        text-align: right;
+    }
 }
 
 /* ================================
@@ -425,507 +522,8 @@ body {
 }
 
 /* ================================
-   CARROSSEL PARA DESTINOS
-================================ */
-.carrossel-destino-container {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 2px solid var(--pink);
-}
-
-.destino-carrossel {
-    margin-top: 20px;
-    margin-bottom: 60px;
-}
-
-.destino-carrossel .carrossel-images {
-    height: 350px;
-}
-
-.destino-pagina .destino-container {
-    min-height: 200mm;
-}
-
-.destino-pagina .carrossel-destino-container {
-    position: relative;
-    bottom: 0;
-    margin-bottom: 30px;
-}
-
-@media print {
-    .destino-carrossel .carrossel-images {
-        height: auto;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin-bottom: 20px;
-    }
-
-    .destino-carrossel .carrossel-image {
-        position: relative;
-        opacity: 1;
-        height: 200px;
-    }
-
-    .destino-carrossel .carrossel-controls,
-    .destino-carrossel .carrossel-counter {
-        display: none;
-    }
-}
-
-/* ================================
-   ESTILOS DO FORMULÁRIO (index.html)
-================================ */
-body.formulario-body {
-    font-family: "Inter", Arial, sans-serif;
-    background: #f5f7fb;
-    margin: 0;
-    padding: 40px;
-    display: flex;
-    justify-content: center;
-}
-
-.formulario-body .page {
-    width: 100%;
-    max-width: 900px;
-    height: auto;
-    min-height: auto;
-    padding: 0;
-    box-shadow: none;
-    background: transparent;
-}
-
-.formulario-body form {
-    width: 100%;
-    background: #fff;
-    padding: 35px 40px;
-    border-radius: 18px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-}
-
-.formulario-body h1 {
-    text-align: center;
-    font-size: 32px;
-    font-weight: 700;
-    margin: 0 auto 25px auto;
-    color: #1a1a1a;
-}
-
-.formulario-body h2 {
-    font-size: 22px;
-    margin-top: 20px;
-    margin-bottom: 0px;
-    color: #1f3b73;
-    border-left: 5px solid #4b6fff;
-    padding-left: 10px;
-}
-
-.formulario-body label {
-    font-weight: 600;
-    font-size: 15px;
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-.formulario-body input,
-.formulario-body textarea {
-    width: 100%;
-    padding: 12px 14px;
-    font-size: 15px;
-    border: 1.8px solid #cfd6e6;
-    border-radius: 10px;
-    box-sizing: border-box;
-}
-
-.formulario-body textarea {
-    resize: vertical;
-    min-height: 44px;
-}
-
-.grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-}
-
-.grid-3 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 18px;
-}
-
-.grid-4 {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-}
-
-.formulario-body button {
-    margin-top: 20px;
-    padding: 14px;
-    font-size: 18px;
-    font-weight: 600;
-    background: #4b6fff;
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-}
-
-#dicasCampo {
-    line-height: 1.0;
-}
-
-/* ESTILOS ADICIONADOS PARA OS NOVOS DESTINOS DINÂMICOS */
-.destino-item {
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-}
-
-.destino-item h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 16px;
-    color: #1f3b73;
-}
-
-.destino-inputs {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-}
-
-.destino-inputs label {
-    font-weight: 600;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-.destino-inputs input,
-.destino-inputs textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1.8px solid #cfd6e6;
-    border-radius: 8px;
-    font-size: 14px;
-}
-
-.remover-destino {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    margin-top: 10px;
-}
-
-.remover-destino:hover {
-    background-color: #c82333;
-}
-
-#adicionar-destino-btn {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    width: 100%;
-}
-
-#adicionar-destino-btn:hover {
-    background-color: #218838;
-}
-
-#adicionar-destino-btn:disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
-}
-
-#multidestinos-container {
-    margin-bottom: 10px;
-}
-
-/* ESTILOS PARA CARROSSEL NO FORMULÁRIO */
-.carrossel-item {
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-}
-
-.carrossel-item h4 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #1f3b73;
-}
-
-.carrossel-imagem {
-    width: 100%;
-    padding: 10px;
-    border: 1.8px solid #cfd6e6;
-    border-radius: 8px;
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-
-.carrossel-imagem-destino {
-    width: 100%;
-    padding: 10px;
-    border: 1.8px solid #cfd6e6;
-    border-radius: 8px;
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-
-.remover-imagem {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.remover-imagem:hover {
-    background-color: #c82333;
-}
-
-#adicionar-imagem-hotel-btn {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    width: 100%;
-}
-
-#adicionar-imagem-hotel-btn:hover {
-    background-color: #218838;
-}
-
-#adicionar-imagem-hotel-btn:disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
-}
-
-.adicionar-imagem-destino-btn {
-    background-color: #17a2b8;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    width: 100%;
-}
-
-.adicionar-imagem-destino-btn:hover {
-    background-color: #138496;
-}
-
-.adicionar-imagem-destino-btn:disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
-}
-
-.destino-carrossel-container {
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    margin-top: 10px;
-    margin-bottom: 15px;
-}
-
-/* Botão para limpar formulário */
-.limpar-formulario-btn {
-    background-color: #ffc107;
-    color: #212529;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    margin-left: 10px;
-}
-
-.limpar-formulario-btn:hover {
-    background-color: #e0a800;
-}
-
-.botoes-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-}
-
-/* ESTILOS ADICIONAIS PARA DESTINOS DINÂMICOS (proposta.html) */
-.destino-pagina {
-    display: none;
-    /* Inicialmente escondido */
-}
-
-.destino-nome-titulo {
-    color: #1f3b73;
-    margin-bottom: 15px;
-    font-size: 24px;
-}
-
-.destino-container {
-    margin-bottom: 30px;
-}
-
-.destino-imagens {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.destino-imagem-item {
-    flex: 1;
-    max-width: 300px;
-}
-
-.sem-imagem {
-    color: #666;
-    font-style: italic;
-    text-align: center;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-}
-
-.destino-pagina {
-    display: block;
-    page-break-before: always;
-    padding: 40px;
-    min-height: 100vh;
-    box-sizing: border-box;
-}
-
-.destino-carrossel {
-    margin-top: 30px;
-    position: relative;
-}
-
-.carrossel-message {
-    text-align: center;
-    padding: 40px;
-    color: #666;
-    font-style: italic;
-}
-
-/* DESTINOS MÚLTIPLOS */
-
-.destino-pagina {
-    display: block !important;
-    page-break-before: always;
-    break-before: page;
-    padding: 20mm 15mm;
-    position: relative;
-}
-
-.destino-nome-titulo {
-    font-size: 34px;
-    text-align: center;
-    margin: 30px 0;
-    color: #1f3b73;
-}
-
-.destino-pagina .bloco {
-    margin-bottom: 25px;
-}
-
-.destino-pagina .bloco h2 {
-    font-size: 22px;
-    margin-bottom: 8px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 4px;
-}
-
-.destino-pagina .bloco p {
-    font-size: 20px;
-    line-height: 1.6;
-}
-
-/* Ajuste do carrossel dentro do destino */
-.destino-carrossel {
-    margin: 30px 0;
-}
-
-.carrossel {
-    position: relative;
-}
-
-.carrossel-arrow {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    color: rgba(255, 255, 255, 0.7);
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    user-select: none;
-}
-
-.carrossel-arrow.left {
-    left: 0;
-}
-
-.carrossel-arrow.right {
-    right: 0;
-}
-
-.carrossel:hover .carrossel-arrow {
-    opacity: 1;
-}
-
-@media (max-width: 768px) {
-    .carrossel-arrow {
-        display: none;
-        /* no mobile só swipe */
-    }
-}
-
-/* ================================
    SETAS TRANSPARENTES – CARROSSEL
 ================================ */
-
-.carrossel {
-    position: relative;
-}
-
 .carrossel-arrow {
     position: absolute;
     top: 0;
@@ -982,40 +580,28 @@ body.formulario-body {
 /* ===========================
    REMOVE SETA PADRÃO DE CONTROLE
 ============================ */
-
-/* Esconde os botões de controle originais do carrossel da hospedagem */
 #carrossel-hotel .carrossel-prev,
 #carrossel-hotel .carrossel-next {
     display: none !important;
 }
 
-
 /* =====================================
    AJUSTE FINAL – CARROSSEL MOBILE
 ===================================== */
 @media (max-width: 768px) {
-
-    /* Garante largura total real */
     .carrossel {
         width: 100%;
         max-width: 100%;
         margin: 20px auto;
     }
 
-    /* Área das imagens */
     .carrossel-images {
         width: 100%;
-        height: 260px;
+        height: 50vh;
+        max-height: 350px;
         border-radius: 10px;
     }
 
-    .carrossel-images img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    /* Controles mais compactos */
     .carrossel-controls {
         gap: 10px;
         margin-top: 12px;
@@ -1030,7 +616,6 @@ body.formulario-body {
         padding: 0;
     }
 
-    /* Dots mais visíveis no mobile */
     .carrossel-dot {
         width: 10px;
         height: 10px;
@@ -1040,13 +625,201 @@ body.formulario-body {
         font-size: 14px;
         margin-top: 10px;
     }
+    
+    /* Esconder setas transparentes no mobile */
+    .carrossel-arrow {
+        display: none;
+    }
+}
+
+/* ================================
+   CARROSSEL PARA DESTINOS
+================================ */
+.carrossel-destino-container {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid var(--pink);
+}
+
+.destino-carrossel {
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+
+.destino-carrossel .carrossel-images {
+    height: 350px;
+}
+
+@media print {
+    .destino-carrossel .carrossel-images {
+        height: auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .destino-carrossel .carrossel-image {
+        position: relative;
+        opacity: 1;
+        height: 200px;
+    }
+
+    .destino-carrossel .carrossel-controls,
+    .destino-carrossel .carrossel-counter {
+        display: none;
+    }
+}
+
+/* ================================
+   DESTINOS DINÂMICOS
+================================ */
+.destino-pagina {
+    display: block !important;
+    page-break-before: always;
+    break-before: page;
+    padding: 20mm 15mm;
+    position: relative;
+    min-height: 100svh;
+    box-sizing: border-box;
+}
+
+.destino-nome-titulo {
+    font-size: clamp(24px, 7vw, 34px);
+    text-align: center;
+    margin: 30px 0;
+    color: #1f3b73;
+}
+
+.destino-pagina .bloco {
+    margin-bottom: 25px;
+}
+
+.destino-pagina .bloco h2 {
+    font-size: clamp(18px, 5vw, 22px);
+    margin-bottom: 8px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 4px;
+}
+
+.destino-pagina .bloco p {
+    font-size: clamp(16px, 4.5vw, 20px);
+    line-height: 1.6;
+}
+
+/* ================================
+   ESTILOS DO FORMULÁRIO (index.html)
+================================ */
+body.formulario-body {
+    font-family: "Inter", Arial, sans-serif;
+    background: #f5f7fb;
+    margin: 0;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.formulario-body .page {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    min-height: auto;
+    padding: 0;
+    box-shadow: none;
+    background: transparent;
+}
+
+.formulario-body form {
+    width: 100%;
+    background: #fff;
+    padding: 35px 40px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.formulario-body h1 {
+    text-align: center;
+    font-size: clamp(24px, 6vw, 32px);
+    font-weight: 700;
+    margin: 0 auto 25px auto;
+    color: #1a1a1a;
+}
+
+.formulario-body h2 {
+    font-size: clamp(18px, 5vw, 22px);
+    margin-top: 20px;
+    margin-bottom: 0px;
+    color: #1f3b73;
+    border-left: 5px solid #4b6fff;
+    padding-left: 10px;
+}
+
+.formulario-body label {
+    font-weight: 600;
+    font-size: clamp(14px, 4vw, 15px);
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.formulario-body input,
+.formulario-body textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: clamp(15px, 4vw, 16px);
+    border: 1.8px solid #cfd6e6;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.formulario-body textarea {
+    resize: vertical;
+    min-height: 44px;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.formulario-body button {
+    margin-top: 20px;
+    padding: 14px;
+    font-size: clamp(16px, 4.5vw, 18px);
+    font-weight: 600;
+    background: #4b6fff;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    min-height: 50px;
+}
+
+#dicasCampo {
+    line-height: 1.5;
 }
 
 /* ================================
    RESPONSIVIDADE PARA FORMULÁRIO
 ================================ */
 #form-body {
-    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -1061,13 +834,13 @@ body.formulario-body {
     #form-body {
         padding: 0;
         align-items: stretch;
-        background: #fff; /* Fundo branco no mobile */
+        background: #fff;
     }
     
     #form-body form {
         border-radius: 0 !important;
         margin: 0 !important;
-        min-height: 100vh;
+        min-height: 100svh;
         box-shadow: none !important;
         width: 100%;
         padding: 20px 15px !important;
@@ -1079,21 +852,11 @@ body.formulario-body {
         gap: 15px !important;
     }
     
-    /* Textos menores no mobile */
-    #form-body h1 {
-        font-size: 24px !important;
-    }
-    
-    #form-body h2 {
-        font-size: 18px !important;
-        margin-top: 25px !important;
-    }
-    
     /* Inputs mais confortáveis */
     #form-body input,
     #form-body textarea,
     #form-body select {
-        font-size: 16px !important; /* Evita zoom no iOS */
+        font-size: 16px !important;
         padding: 14px 12px !important;
     }
     
@@ -1113,61 +876,264 @@ body.formulario-body {
 }
 
 /* ================================
-   AJUSTES PARA MOLDURAS NO MOBILE
+   ESTILOS ADICIONAIS PARA FORMULÁRIO
+================================ */
+.destino-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.destino-item h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: clamp(14px, 4vw, 16px);
+    color: #1f3b73;
+}
+
+.destino-inputs {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.destino-inputs label {
+    font-weight: 600;
+    font-size: clamp(12px, 3.5vw, 14px);
+    margin-top: 5px;
+}
+
+.destino-inputs input,
+.destino-inputs textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1.8px solid #cfd6e6;
+    border-radius: 8px;
+    font-size: clamp(13px, 3.5vw, 14px);
+}
+
+.remover-destino {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: clamp(12px, 3.5vw, 14px);
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.remover-destino:hover {
+    background-color: #c82333;
+}
+
+#adicionar-destino-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: clamp(14px, 4vw, 16px);
+    font-weight: 600;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+#adicionar-destino-btn:hover {
+    background-color: #218838;
+}
+
+#adicionar-destino-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+#multidestinos-container {
+    margin-bottom: 10px;
+}
+
+.carrossel-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.carrossel-item h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: clamp(14px, 4vw, 16px);
+    color: #1f3b73;
+}
+
+.carrossel-imagem,
+.carrossel-imagem-destino {
+    width: 100%;
+    padding: 10px;
+    border: 1.8px solid #cfd6e6;
+    border-radius: 8px;
+    font-size: clamp(13px, 3.5vw, 14px);
+    margin-bottom: 10px;
+}
+
+.remover-imagem {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: clamp(12px, 3.5vw, 14px);
+    font-weight: 600;
+}
+
+.remover-imagem:hover {
+    background-color: #c82333;
+}
+
+#adicionar-imagem-hotel-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: clamp(14px, 4vw, 16px);
+    font-weight: 600;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+#adicionar-imagem-hotel-btn:hover {
+    background-color: #218838;
+}
+
+#adicionar-imagem-hotel-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.adicionar-imagem-destino-btn {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: clamp(12px, 3.5vw, 14px);
+    font-weight: 600;
+    width: 100%;
+}
+
+.adicionar-imagem-destino-btn:hover {
+    background-color: #138496;
+}
+
+.adicionar-imagem-destino-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.destino-carrossel-container {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.limpar-formulario-btn {
+    background-color: #ffc107;
+    color: #212529;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: clamp(12px, 3.5vw, 14px);
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.limpar-formulario-btn:hover {
+    background-color: #e0a800;
+}
+
+.botoes-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* ================================
+   MELHORIAS GERAIS PARA MOBILE
 ================================ */
 @media (max-width: 768px) {
-    .moldura {
-        height: 40vh !important; /* Altura relativa à tela */
-        max-height: 300px;
-        margin-bottom: 15px;
+    /* Todas as imagens responsivas */
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
     }
     
-    .linha-fotos {
-        flex-direction: column;
-        gap: 15px;
+    /* Prevenir zoom em inputs iOS */
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    textarea {
+        font-size: 16px !important;
     }
     
-    .linha-fotos .moldura {
-        height: 30vh !important;
-        max-height: 250px;
+    /* Melhorar toque em botões */
+    button, 
+    input[type="button"], 
+    input[type="submit"] {
+        min-height: 44px;
+        -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+        tap-highlight-color: rgba(0,0,0,0.1);
+    }
+    
+    /* Scroll suave */
+    .pages-wrapper {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Remover seleção de texto em imagens */
+    img {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 }
 
 /* ================================
-   AJUSTES PARA CARROSSEL NO MOBILE
+   REMOÇÃO DE CONFLITOS
 ================================ */
-@media (max-width: 768px) {
-    .carrossel-images {
-        height: 50vh !important;
-        max-height: 350px;
-        border-radius: 10px;
-    }
-    
-    .carrossel-controls {
-        margin-top: 15px;
-    }
-    
-    .carrossel-prev,
-    .carrossel-next {
-        width: 44px;
-        height: 44px;
-        font-size: 18px;
-    }
+/* REMOVER estas classes conflitantes (foram substituídas acima) */
+.mobile-header,
+.logo-mobile,
+.content-main,
+.mobile-title,
+.mobile-subtitle,
+.contact-info,
+.email,
+.website {
+    display: none !important;
 }
 
-/* ================================
-   AJUSTES PARA RODAPÉ NO MOBILE
-================================ */
-@media (max-width: 768px) {
-    .rodape {
-        position: relative !important;
-        bottom: auto !important;
-        margin-top: 30px;
-        padding-bottom: 20px;
-    }
-    
-    .rodape img {
-        width: 100% !important;
-        max-width: 300px;
-    }
+/* REMOVER duplicações de .destino-pagina */
+.destino-pagina:not(:first-of-type) {
+    display: block !important;
+}
+
+/* REMOVER regras conflitantes de .carrossel-arrow */
+.carrossel-arrow[style*="display: flex"] {
+    display: none !important;
 }
