@@ -1,0 +1,957 @@
+/* ================================
+   VARIÁVEIS GLOBAIS
+================================ */
+:root {
+    --pink: #E51B57;
+    --pink-dark: #cc184d;
+    --white: #FFFFFF;
+    --pad: 30px;
+    --radius: 12px;
+}
+
+/* ================================
+   RESET / BASE
+================================ */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: #ccc;
+    font-family: "Montserrat", sans-serif;
+}
+
+/* ================================
+   WRAPPER
+================================ */
+.pages-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    gap: 30px;
+}
+
+/* ================================
+   PÁGINA A4
+================================ */
+.page {
+    width: 210mm;
+    height: 297mm;
+    background: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+    position: relative;
+    box-sizing: border-box;
+    padding: 20mm 15mm;
+
+    /* CONTROLE DE QUEBRA */
+    page-break-after: always;
+    break-after: page;
+}
+
+.page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+}
+
+/* ================================
+   CENTRO
+================================ */
+.center-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* ================================
+   LOGO / RODAPÉ
+================================ */
+.logo {
+    width: 250px;
+    margin: 0 auto 15px;
+    display: block;
+}
+
+.rodape {
+    width: 100%;
+    position: absolute;
+    bottom: 10mm;
+    left: 0;
+    text-align: center;
+}
+
+.rodape img {
+    width: 90%;
+    height: auto;
+}
+
+/* ================================
+   IMAGENS
+================================ */
+.moldura {
+    width: 100%;
+    height: 70mm;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: rgba(255, 255, 255, .25);
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 6px;
+    margin-bottom: 12px;
+
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.moldura img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* PROTEÇÃO CONTRA IMAGEM VAZIA */
+.moldura img[src=""],
+.moldura img:not([src]) {
+    display: none;
+}
+
+.linha-fotos {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 20px;
+
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.linha-fotos .moldura {
+    flex: 1;
+    height: 85mm;
+}
+
+/* ================================
+   TEXTOS / INFOS
+================================ */
+.infos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 18px;
+}
+
+.bloco {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.infos h2,
+.bloco h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 5px;
+}
+
+.infos p,
+.bloco p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 0 8px;
+}
+
+/* ================================
+   SLIDE 1
+================================ */
+#slide1 {
+    background-image: url("assets/bg/slide1.jpg.png");
+    background-size: cover;
+    background-position: center;
+}
+
+#page1 {
+    background-image: url("../assets/bg/slide1.jpg.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.center-text-slide1 h1 {
+    font-size: 50px;
+    font-family: 'Bebas Neue', sans-serif;
+    margin: 0;
+}
+
+.center-text-slide1 h2 {
+    font-size: 42px;
+    color: var(--pink);
+    font-family: 'Bebas Neue', sans-serif;
+    margin: 0;
+}
+
+/* ================================
+   PASSEIOS
+================================ */
+.lista-passeios {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-top: 15px;
+
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.lista-passeios .item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+
+/* ================================
+   DICAS
+================================ */
+#dicasCampo {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-top: 15px;
+}
+
+#dicasCampo .dica-item {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+@media print {
+    #dicasCampo .dica-item {
+        break-inside: avoid;
+    }
+}
+
+/* ================================
+   VALORES
+================================ */
+.price-card {
+    width: 700px;
+    max-width: 90%;
+    background: var(--pink);
+    border-radius: var(--radius);
+    padding: 30px 40px;
+    color: #fff;
+    margin: 50px auto 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .4);
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    column-gap: 20px;
+    align-items: center;
+}
+
+.label {
+    font-size: 24px;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: 700;
+    min-width: 150px;
+    text-align: right;
+}
+
+.dots {
+    width: 100%;
+    height: 1px;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, .9) 2.5px, transparent 2.5px);
+    background-size: 15px 1px;
+    background-repeat: repeat-x;
+}
+
+.row.total {
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, .3);
+    padding-top: 10px;
+}
+
+.row.total .label,
+.row.total .price {
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.row.total .dots {
+    display: none;
+}
+
+/* ================================
+   CARROSSEL DE IMAGENS (PROPOSTA)
+================================ */
+.carrossel {
+    width: 100%;
+    max-width: 800px;
+    margin: 40px auto;
+    position: relative;
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.carrossel-images {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.carrossel-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.carrossel-image.active {
+    opacity: 1;
+}
+
+.carrossel-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0 10px;
+}
+
+.carrossel-prev,
+.carrossel-next {
+    background: var(--pink);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.carrossel-prev:hover,
+.carrossel-next:hover {
+    background: var(--pink-dark);
+}
+
+.carrossel-dots {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.carrossel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.carrossel-dot.active {
+    background: var(--pink);
+}
+
+.carrossel-counter {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 16px;
+    color: #666;
+    font-weight: 500;
+}
+
+.carrossel-message {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+    font-style: italic;
+    font-size: 18px;
+}
+
+/* ================================
+   CARROSSEL PARA DESTINOS
+================================ */
+.carrossel-destino-container {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid var(--pink);
+}
+
+.destino-carrossel {
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+
+.destino-carrossel .carrossel-images {
+    height: 350px;
+}
+
+.destino-pagina .destino-container {
+    min-height: 200mm;
+}
+
+.destino-pagina .carrossel-destino-container {
+    position: relative;
+    bottom: 0;
+    margin-bottom: 30px;
+}
+
+@media print {
+    .destino-carrossel .carrossel-images {
+        height: auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .destino-carrossel .carrossel-image {
+        position: relative;
+        opacity: 1;
+        height: 200px;
+    }
+
+    .destino-carrossel .carrossel-controls,
+    .destino-carrossel .carrossel-counter {
+        display: none;
+    }
+}
+
+/* ================================
+   ESTILOS DO FORMULÁRIO (index.html)
+================================ */
+body.formulario-body {
+    font-family: "Inter", Arial, sans-serif;
+    background: #f5f7fb;
+    margin: 0;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.formulario-body .page {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    min-height: auto;
+    padding: 0;
+    box-shadow: none;
+    background: transparent;
+}
+
+.formulario-body form {
+    width: 100%;
+    background: #fff;
+    padding: 35px 40px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.formulario-body h1 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 auto 25px auto;
+    color: #1a1a1a;
+}
+
+.formulario-body h2 {
+    font-size: 22px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    color: #1f3b73;
+    border-left: 5px solid #4b6fff;
+    padding-left: 10px;
+}
+
+.formulario-body label {
+    font-weight: 600;
+    font-size: 15px;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.formulario-body input,
+.formulario-body textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 15px;
+    border: 1.8px solid #cfd6e6;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.formulario-body textarea {
+    resize: vertical;
+    min-height: 44px;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.formulario-body button {
+    margin-top: 20px;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: 600;
+    background: #4b6fff;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+#dicasCampo {
+    line-height: 1.0;
+}
+
+/* ESTILOS ADICIONADOS PARA OS NOVOS DESTINOS DINÂMICOS */
+.destino-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.destino-item h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #1f3b73;
+}
+
+.destino-inputs {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.destino-inputs label {
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.destino-inputs input,
+.destino-inputs textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1.8px solid #cfd6e6;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.remover-destino {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.remover-destino:hover {
+    background-color: #c82333;
+}
+
+#adicionar-destino-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+#adicionar-destino-btn:hover {
+    background-color: #218838;
+}
+
+#adicionar-destino-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+#multidestinos-container {
+    margin-bottom: 10px;
+}
+
+/* ESTILOS PARA CARROSSEL NO FORMULÁRIO */
+.carrossel-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.carrossel-item h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #1f3b73;
+}
+
+.carrossel-imagem {
+    width: 100%;
+    padding: 10px;
+    border: 1.8px solid #cfd6e6;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.carrossel-imagem-destino {
+    width: 100%;
+    padding: 10px;
+    border: 1.8px solid #cfd6e6;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.remover-imagem {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.remover-imagem:hover {
+    background-color: #c82333;
+}
+
+#adicionar-imagem-hotel-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+#adicionar-imagem-hotel-btn:hover {
+    background-color: #218838;
+}
+
+#adicionar-imagem-hotel-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.adicionar-imagem-destino-btn {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    width: 100%;
+}
+
+.adicionar-imagem-destino-btn:hover {
+    background-color: #138496;
+}
+
+.adicionar-imagem-destino-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.destino-carrossel-container {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+/* Botão para limpar formulário */
+.limpar-formulario-btn {
+    background-color: #ffc107;
+    color: #212529;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.limpar-formulario-btn:hover {
+    background-color: #e0a800;
+}
+
+.botoes-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* ESTILOS ADICIONAIS PARA DESTINOS DINÂMICOS (proposta.html) */
+.destino-pagina {
+    display: none;
+    /* Inicialmente escondido */
+}
+
+.destino-nome-titulo {
+    color: #1f3b73;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.destino-container {
+    margin-bottom: 30px;
+}
+
+.destino-imagens {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.destino-imagem-item {
+    flex: 1;
+    max-width: 300px;
+}
+
+.sem-imagem {
+    color: #666;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.destino-pagina {
+    display: block;
+    page-break-before: always;
+    padding: 40px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.destino-carrossel {
+    margin-top: 30px;
+    position: relative;
+}
+
+.carrossel-message {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-style: italic;
+}
+
+/* DESTINOS MÚLTIPLOS */
+
+.destino-pagina {
+    display: block !important;
+    page-break-before: always;
+    break-before: page;
+    padding: 20mm 15mm;
+    position: relative;
+}
+
+.destino-nome-titulo {
+    font-size: 34px;
+    text-align: center;
+    margin: 30px 0;
+    color: #1f3b73;
+}
+
+.destino-pagina .bloco {
+    margin-bottom: 25px;
+}
+
+.destino-pagina .bloco h2 {
+    font-size: 22px;
+    margin-bottom: 8px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 4px;
+}
+
+.destino-pagina .bloco p {
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+/* Ajuste do carrossel dentro do destino */
+.destino-carrossel {
+    margin: 30px 0;
+}
+
+.carrossel {
+    position: relative;
+}
+
+.carrossel-arrow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    user-select: none;
+}
+
+.carrossel-arrow.left {
+    left: 0;
+}
+
+.carrossel-arrow.right {
+    right: 0;
+}
+
+.carrossel:hover .carrossel-arrow {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .carrossel-arrow {
+        display: none;
+        /* no mobile só swipe */
+    }
+}
+
+/* ================================
+   SETAS TRANSPARENTES – CARROSSEL
+================================ */
+
+.carrossel {
+  position: relative;
+}
+
+.carrossel-arrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 15%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.carrossel-arrow.left {
+  left: 0;
+}
+
+.carrossel-arrow.right {
+  right: 0;
+}
+
+.carrossel-arrow::before {
+  content: '';
+}
+
+.carrossel-arrow:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Ícone da seta */
+.carrossel-arrow span {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 36px;
+  color: rgba(255, 255, 255, 0.75);
+  pointer-events: none;
+}
+
+.carrossel-arrow.left span {
+  left: 15px;
+}
+
+.carrossel-arrow.right span {
+  right: 15px;
+}
+
+/* Mobile: setas mais sutis */
+@media (max-width: 768px) {
+  .carrossel-arrow span {
+    font-size: 28px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+/* ===========================
+   REMOVE SETA PADRÃO DE CONTROLE
+============================ */
+
+/* Esconde os botões de controle originais do carrossel da hospedagem */
+#carrossel-hotel .carrossel-prev,
+#carrossel-hotel .carrossel-next {
+    display: none !important;
+}

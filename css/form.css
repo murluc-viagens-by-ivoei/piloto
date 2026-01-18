@@ -1,0 +1,207 @@
+/* ======================================================
+   FORMULÁRIO – ESTILO LUXO SUAVE
+   Apenas aparência – NÃO altera estrutura
+====================================================== */
+
+/* VARIÁVEIS DE COR */
+:root {
+  --primary: #7A1E3A;        /* vinho elegante */
+  --primary-dark: #64192F;
+  --accent: #C9A24D;         /* dourado fosco */
+
+  --bg-main: #F7F6F3;
+  --bg-card: #FFFFFF;
+
+  --text-main: #2B2B2B;
+  --text-muted: #6B6B6B;
+}
+
+/* FUNDO GERAL */
+body.formulario-body {
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+/* FORMULÁRIO */
+form {
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 40px;
+  background: var(--bg-card);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* TÍTULOS */
+form h1,
+form h2,
+form h3 {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+form h1 {
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+form h2 {
+  font-size: 22px;
+  margin-top: 45px;
+  border-bottom: 2px solid rgba(0,0,0,0.08);
+  padding-bottom: 10px;
+}
+
+/* GRUPOS */
+.form-group,
+.form-row,
+fieldset {
+  margin-bottom: 22px;
+}
+
+/* LABELS */
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+/* INPUTS / SELECT / TEXTAREA */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 13px 15px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* FOCO */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(201, 162, 77, 0.18);
+}
+
+/* FILE INPUT */
+input[type="file"] {
+  padding: 10px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+/* GRID RESPONSIVO */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+}
+
+/* FIELDSET */
+fieldset {
+  border: 1px solid #eee;
+  border-radius: 14px;
+  padding: 22px;
+  background: #fafafa;
+}
+
+fieldset legend {
+  font-weight: 600;
+  padding: 0 10px;
+  color: var(--text-muted);
+}
+
+/* CHECKBOX / RADIO */
+input[type="checkbox"],
+input[type="radio"] {
+  transform: scale(1.1);
+  margin-right: 6px;
+}
+
+/* BOTÕES */
+button,
+input[type="submit"] {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 14px 30px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+/* BOTÕES SECUNDÁRIOS */
+button.secondary {
+  background: #e6e6e6;
+  color: #333;
+}
+
+button.secondary:hover {
+  background: #d8d8d8;
+}
+
+/* SEPARADORES */
+hr {
+  border: none;
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+  margin: 45px 0;
+}
+
+/* MENSAGENS */
+.alert,
+.notice {
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  margin-bottom: 22px;
+}
+
+.alert {
+  background: #fbe9ee;
+  color: #7a1e3a;
+}
+
+.notice {
+  background: #eef3f8;
+  color: #1e2a3a;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  form {
+    padding: 25px;
+  }
+
+  form h1 {
+    font-size: 24px;
+  }
+
+  form h2 {
+    font-size: 20px;
+  }
+}

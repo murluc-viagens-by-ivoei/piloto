@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Proposta</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/Proposta-de-viagem-Mur-Luc/css/style.css">
+
+</head>
+
+<body>
+  <div class="pages-wrapper">
+
+    <!-- PÁGINA 1 -->
+    <div class="page center-page" id="page1">
+      <div class="center-text-slide1">
+        <h1 id="destinoCampo"></h1>
+        <h2 id="mesAnoCampo"></h2>
+      </div>
+
+      <div class="rodape">
+        <img src="./assets/rodape.png" alt="Rodapé" />
+      </div>
+    </div>
+
+    <!-- PÁGINA 2 -->
+    <div class="page" id="page2">
+      <img src="./assets/logo.png" class="logo" alt="Logo" />
+
+      <h1 id="chegadaCampo"></h1>
+
+      <div class="moldura">
+        <img id="imgFoto01" src="" alt="Foto principal" />
+      </div>
+
+      <p>
+        <strong>✈️➡️🚖 Transfer:</strong>
+        <span id="trasladoCampo"></span>
+      </p>
+
+      <div class="linha-fotos">
+        <div class="moldura">
+          <img id="imgFoto02" src="" alt="Foto 2" />
+        </div>
+        <div class="moldura">
+          <img id="imgFoto03" src="" alt="Foto 3" />
+        </div>
+      </div>
+
+      <div class="rodape">
+        <img src="./assets/rodape.png" alt="Rodapé" />
+      </div>
+    </div>
+
+    <!-- PÁGINA 3: HOSPEDAGEM -->
+    <div class="page" id="page3">
+      <img src="./assets/logo.png" class="logo" alt="Logo" />
+      <h1 id="tituloHospedagemCampo"></h1>
+
+      <div class="infos">
+
+        <div class="checks">
+          <div class="bloco">
+            <h2>Check in</h2>
+            <p id="hotelCheckinCampo"></p>
+          </div>
+          <div class="bloco">
+            <h2>Check out</h2>
+            <p id="hotelCheckoutCampo"></p>
+          </div>
+        </div>
+
+        <div class="bloco">
+          <h2>Descrição do Hotel:</h2>
+          <p id="descricaoCampo"></p>
+        </div>
+
+        <div class="bloco">
+          <h2>Dispõe de:</h2>
+          <p id="hotelServicosCampo"></p>
+        </div>
+
+        <div class="bloco">
+          <h2>Endereço:</h2>
+          <p id="enderecoCampo"></p>
+        </div>
+
+      </div>
+
+      <div class="rodape">
+        <img src="./assets/rodape.png" alt="Rodapé" />
+      </div>
+    </div>
+
+    <!-- PÁGINA 4: CARROSSEL DO HOTEL -->
+    <div class="page" id="page4">
+      <img src="./assets/logo.png" class="logo" alt="Logo" />
+      <h1>Fotos da Hospedagem</h1>
+
+      <div id="carrossel-hotel" class="carrossel">
+        <div id="carrossel-images-hotel" class="carrossel-images"></div>
+
+        <div class="carrossel-controls">
+          <button class="carrossel-prev" onclick="prevSlideHotel()">❮</button>
+          <div class="carrossel-dots" id="carrossel-dots-hotel"></div>
+          <button class="carrossel-next" onclick="nextSlideHotel()">❯</button>
+        </div>
+
+        <div class="carrossel-counter" id="carrossel-counter-hotel"></div>
+      </div>
+
+      <div class="rodape">
+        <img src="./assets/rodape.png" alt="Rodapé" />
+      </div>
+    </div>
+
+    <!-- DESTINOS MÚLTIPLOS -->
+    <div id="destinos-container" class="pages-wrapper">
+      <!-- Os destinos serão inseridos aqui pelo JavaScript -->
+    </div>
+
+    <!-- PÁGINA DICAS -->
+    <div class="page" id="page-dicas">
+      <img src="./assets/logo.png" class="logo" alt="Logo" />
+      <h1>Dicas Importantes</h1>
+
+      <div id="dicasCampo" class="dicas"></div>
+
+      <div class="rodape">
+        <img src="./assets/rodape.png" alt="Rodapé" />
+      </div>
+    </div>
+
+    <!-- PÁGINA VALORES -->
+    <div class="page" id="page-valores">
+      <img src="./assets/logo.png" class="logo" alt="Logo" />
+      <h1>Valores do Pacote</h1>
+
+      <div class="price-card">
+        <div class="items" id="itemsList"></div>
+      </div>
+
+      <p>✈️ Valores sujeitos a alterações sem aviso prévio.</p>
+
+      <div class="rodape">
+        <img src="./assets/rodape.png" alt="Rodapé" />
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JS -->
+  <script type="module" src="./js/script-proposta.js"></script>
+</body>
+
+</html>

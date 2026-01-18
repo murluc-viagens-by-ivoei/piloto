@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Formulário Proposta</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/form.css">
+</head>
+
+<body class="formulario-body">
+    <form id="formCotacao">
+
+        <h2>1. Dados Iniciais</h2>
+        <div class="grid-2">
+            <div><label>1º Destino:</label><input type="text" id="destino"></div>
+            <div><label>Mês/Ano da Viagem:</label><input type="text" id="mesAno"></div>
+        </div>
+
+        <h2>2. Passagem</h2>
+        <label>Imagem 01:</label><input type="text" id="foto01">
+
+        <h2>3. Chegada 1º Destino</h2>
+        <div class="grid-4">
+            <div><label>Aeroporto / Chegada:</label><input type="text" id="chegada"></div>
+            <div><label>Traslado:</label><input type="text" id="traslado"></div>
+            <div><label>Imagem 02:</label><input type="text" id="foto02"></div>
+            <div><label>Imagem 03:</label><input type="text" id="foto03"></div>
+        </div>
+
+        <h2>4. Hospedagem 1º Destino</h2>
+        <div class="grid-3">
+            <div><label>Nome:</label><input type="text" id="tituloHospedagemCampo"></div>
+            <div><label>Check-in:</label><input type="text" id="hotelCheckinCampo"></div>
+            <div><label>Check-out:</label><input type="text" id="hotelCheckoutCampo"></div>
+        </div>
+
+        <div class="grid-3">
+            <div><label>Endereço:</label><input type="text" id="enderecoCampo"></div>
+            <div><label>Descrição:</label><textarea id="descricaoCampo" rows="4"></textarea></div>
+            <div><label>Dispõe de:</label><textarea id="hotelServicosCampo" rows="4"></textarea></div>
+        </div>
+
+        <h2>5. Fotos Hotel (Carrossel - até 8 imagens)</h2>
+        <div id="carrossel-hotel-container">
+            <div class="carrossel-item" data-index="1">
+                <h4>Imagem 1</h4>
+                <input type="text" class="carrossel-imagem" placeholder="URL da imagem" id="hotel-carrossel-01">
+                <button type="button" class="remover-imagem"
+                    onclick="removerImagemCarrossel(this, 'hotel')">Remover</button>
+            </div>
+        </div>
+        <button type="button" id="adicionar-imagem-hotel-btn">+ Adicionar imagem (1/8)</button>
+
+        <h2>6. MultiDestinos</h2>
+
+        <div id="multidestinos-container"></div>
+
+        <button type="button" id="adicionar-destino-btn">
+            + Adicionar novo destino (0/20)
+        </button>
+
+
+        <h2>7. Dicas Gerais</h2>
+        <textarea id="dicasCampo" rows="4"></textarea>
+
+        <h2>8. Valores</h2>
+        <div class="grid-2">
+            <input type="number" id="valorHotel" placeholder="Hotel">
+            <input type="number" id="valorAereo" placeholder="Passagem aérea">
+        </div>
+        <div class="grid-2">
+            <input type="number" id="valorTraslado" placeholder="Traslado">
+            <input type="number" id="valorSeguro" placeholder="Seguro viagem">
+        </div>
+
+        <div class="botoes-container">
+            <button type="submit">Gerar Proposta</button>
+            <button type="button" class="limpar-formulario-btn" id="limparFormularioBtn">Limpar Formulário</button>
+        </div>
+
+    </form>
+    </div>
+
+    <script type="module" src="js/form.js"></script>
+</body>
+
+</html>
