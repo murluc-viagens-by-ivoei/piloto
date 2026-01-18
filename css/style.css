@@ -26,31 +26,64 @@ body {
 .pages-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
-    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    gap: 0;
+}
+
+/* Desktop: espaçamento entre páginas */
+@media (min-width: 769px) {
+    .pages-wrapper {
+        padding: 30px 20px;
+        gap: 30px;
+    }
 }
 
 /* ================================
    PÁGINA A4
 ================================ */
 .page {
-    width: 210mm;
-    height: 297mm;
+    width: 100%;
+    min-height: 100vh;
     background: #fff;
-    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
     position: relative;
     box-sizing: border-box;
-    padding: 20mm 15mm;
-
-    /* CONTROLE DE QUEBRA */
-    page-break-after: always;
-    break-after: page;
+    padding: clamp(30px, 5vw, 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    /* Somente para desktop - sombra suave */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    margin-bottom: 20px;
 }
 
-.page:last-child {
-    page-break-after: auto;
-    break-after: auto;
+/* Remove sombra e borda no mobile */
+@media (max-width: 768px) {
+    .page {
+        min-height: 100svh; /* Melhor para mobile */
+        padding: 25px 20px;
+        box-shadow: none;
+        border-radius: 0;
+        margin-bottom: 0;
+        border-bottom: 1px solid #eee; /* Separador sutil */
+    }
+}
+
+/* Para impressão, mantenha o estilo A4 */
+@media print {
+    .page {
+        width: 210mm;
+        height: 297mm;
+        page-break-after: always;
+        padding: 20mm 15mm;
+        border-radius: 0;
+        box-shadow: none;
+        margin-bottom: 0;
+    }
 }
 
 /* ================================
@@ -890,60 +923,60 @@ body.formulario-body {
 ================================ */
 
 .carrossel {
-  position: relative;
+    position: relative;
 }
 
 .carrossel-arrow {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 15%;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  z-index: 10;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 15%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
 }
 
 .carrossel-arrow.left {
-  left: 0;
+    left: 0;
 }
 
 .carrossel-arrow.right {
-  right: 0;
+    right: 0;
 }
 
 .carrossel-arrow::before {
-  content: '';
+    content: '';
 }
 
 .carrossel-arrow:hover {
-  background: rgba(0, 0, 0, 0.04);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 /* Ícone da seta */
 .carrossel-arrow span {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 36px;
-  color: rgba(255, 255, 255, 0.75);
-  pointer-events: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 36px;
+    color: rgba(255, 255, 255, 0.75);
+    pointer-events: none;
 }
 
 .carrossel-arrow.left span {
-  left: 15px;
+    left: 15px;
 }
 
 .carrossel-arrow.right span {
-  right: 15px;
+    right: 15px;
 }
 
 /* Mobile: setas mais sutis */
 @media (max-width: 768px) {
-  .carrossel-arrow span {
-    font-size: 28px;
-    color: rgba(255, 255, 255, 0.6);
-  }
+    .carrossel-arrow span {
+        font-size: 28px;
+        color: rgba(255, 255, 255, 0.6);
+    }
 }
 
 /* ===========================
@@ -962,73 +995,53 @@ body.formulario-body {
 ===================================== */
 @media (max-width: 768px) {
 
-  /* Garante largura total real */
-  .carrossel {
-    width: 100%;
-    max-width: 100%;
-    margin: 20px auto;
-  }
+    /* Garante largura total real */
+    .carrossel {
+        width: 100%;
+        max-width: 100%;
+        margin: 20px auto;
+    }
 
-  /* Área das imagens */
-  .carrossel-images {
-    width: 100%;
-    height: 260px;
-    border-radius: 10px;
-  }
+    /* Área das imagens */
+    .carrossel-images {
+        width: 100%;
+        height: 260px;
+        border-radius: 10px;
+    }
 
-  .carrossel-images img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+    .carrossel-images img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-  /* Controles mais compactos */
-  .carrossel-controls {
-    gap: 10px;
-    margin-top: 12px;
-    padding: 0 6px;
-  }
+    /* Controles mais compactos */
+    .carrossel-controls {
+        gap: 10px;
+        margin-top: 12px;
+        padding: 0 6px;
+    }
 
-  .carrossel-prev,
-  .carrossel-next {
-    font-size: 18px;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-  }
+    .carrossel-prev,
+    .carrossel-next {
+        font-size: 18px;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+    }
 
-  /* Dots mais visíveis no mobile */
-  .carrossel-dot {
-    width: 10px;
-    height: 10px;
-  }
+    /* Dots mais visíveis no mobile */
+    .carrossel-dot {
+        width: 10px;
+        height: 10px;
+    }
 
-  .carrossel-counter {
-    font-size: 14px;
-    margin-top: 10px;
-  }
+    .carrossel-counter {
+        font-size: 14px;
+        margin-top: 10px;
+    }
 }
 
-/* ==============================
-   PASSO 1 – PÁGINAS FULL SCREEN
-   Base para experiência web
-============================== */
 
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-.pages-wrapper {
-  width: 100%;
-}
-
-.page {
-  min-height: 100svh; /* melhor que 100vh no mobile */
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
+/* REMOVA ou COMENTE todo este bloco */
+/* Ele conflita com as modificações acima */
