@@ -1137,3 +1137,33 @@ body.formulario-body {
 .carrossel-arrow[style*="display: flex"] {
     display: none !important;
 }
+
+/* === PADRONIZAÇÃO DE MOLDURAS (PASSAGEM x HOSPEDAGEM) === */
+
+/* Altura padrão usada no carrossel */
+:root {
+  --altura-moldura-padrao: 360px;
+}
+
+/* Moldura da imagem principal da passagem */
+#page2 > .moldura {
+  height: var(--altura-moldura-padrao);
+}
+
+/* Garantia de preenchimento correto */
+#page2 > .moldura img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Molduras menores (foto 02 e 03) permanecem proporcionais */
+#page2 .linha-fotos .moldura {
+  height: calc(var(--altura-moldura-padrao) / 2.2);
+}
+
+#page2 .linha-fotos img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
