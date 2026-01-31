@@ -1180,3 +1180,17 @@ body.formulario-body {
   object-fit: cover;
 }
 
+/* === AUMENTO REAL DAS MOLDURAS - IMAGENS 02 E 03 === */
+
+#page2 .linha-fotos .moldura {
+  height: 240px; /* aumente aqui se quiser mais */
+}
+
+#page2 .linha-fotos .moldura img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
