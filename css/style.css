@@ -1188,6 +1188,15 @@ body.formulario-body {
   object-fit: cover;
 }
 
+@media print {
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+}
+
+
+
 
 
 
