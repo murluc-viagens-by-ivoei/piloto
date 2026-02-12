@@ -176,25 +176,19 @@ html, body {
 .moldura {
     width: 100%;
     height: 70mm;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     overflow: hidden;
-    background: rgba(255, 255, 255, .25);
-    border: 1px solid rgba(0, 0, 0, .15);
-    border-radius: 6px;
-    margin-bottom: 12px;
-    break-inside: avoid;
-    page-break-inside: avoid;
+    position: relative;
 }
 
 .moldura img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
 }
+
 
 /* PROTEÇÃO CONTRA IMAGEM VAZIA */
 .moldura img[src=""],
@@ -1193,6 +1187,7 @@ body.formulario-body {
   height: 100%;
   object-fit: cover;
 }
+
 
 
 
